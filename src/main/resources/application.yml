@@ -1,0 +1,42 @@
+server:
+  port: ${PORT:8761}  # Render sets PORT env variable
+
+spring:
+  application:
+    name: eureka-server
+
+  # Security credentials for Eureka
+  security:
+    user:
+      name: ${EUREKA_USERNAME:eureka}
+      password: ${EUREKA_PASSWORD:eureka-secret-2024}
+
+eureka:
+  instance:
+    hostname: ${EUREKA_HOSTNAME:localhost}
+    prefer-ip-address: false
+  client:
+    # Don't register itself as a client
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    # Enable self-preservation in production
+    enable-self-preservation: ${EUREKA_SELF_PRESERVATION:false}
+    # Eviction interval
+    eviction-interval-timer-in-ms: ${EUREKA_EVICTION_INTERVAL:5000}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    com.netflix.eureka: WARN
+    com.netflix.discovery: WARN
