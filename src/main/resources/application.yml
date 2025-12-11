@@ -26,6 +26,10 @@ eureka:
     enable-self-preservation: ${EUREKA_SELF_PRESERVATION:false}
     # Eviction interval
     eviction-interval-timer-in-ms: ${EUREKA_EVICTION_INTERVAL:5000}
+    # Disable health status check - rely on heartbeat only
+    # This is needed on Render where Eureka can't reach HTTPS health endpoints
+    disable-delta: false
+    health-status-page-url-check-enabled: false
 
 management:
   endpoints:
