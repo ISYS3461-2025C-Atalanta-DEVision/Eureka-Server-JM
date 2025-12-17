@@ -1,4 +1,4 @@
-# Standalone Dockerfile for Render Deployment
+# Dockerfile for Render Deployment
 FROM eclipse-temurin:21-jdk AS builder
 
 WORKDIR /app
@@ -6,8 +6,8 @@ WORKDIR /app
 # Install Maven
 RUN apt-get update && apt-get install -y maven && rm -rf /var/lib/apt/lists/*
 
-# Copy standalone pom.xml
-COPY pom-standalone.xml ./pom.xml
+# Copy pom.xml for dependency caching
+COPY pom.xml ./pom.xml
 
 # Download dependencies (cached layer)
 RUN mvn dependency:go-offline -B || true
