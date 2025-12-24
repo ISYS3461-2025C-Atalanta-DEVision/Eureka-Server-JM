@@ -9,7 +9,7 @@ spring:
   security:
     user:
       name: ${EUREKA_USERNAME:eureka}
-      password: ${EUREKA_PASSWORD:eureka-secret-2024}
+      password: ${EUREKA_PASSWORD:strongpassword}
 
 eureka:
   instance:
